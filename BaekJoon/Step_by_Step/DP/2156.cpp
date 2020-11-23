@@ -17,15 +17,16 @@ void init(){
 }
 
 void solve(){
-	int answer = 0;
 	dp[1] = wine[1];
 	dp[2] = wine[1] + wine[2];
-	dp[3] = max(wine[2] + wine[3], dp[2]);
+	dp[3] = max(max(dp[1] + wine[3], dp[1] + wine[2]), wine[2] + wine[3]);
 	for(int i = 4; i <= n; i++){
-		dp[i] = max(dp[i-3] + wine[i-1] + wine[i], dp[i-2] + wine[i]);
-		if(dp[i] > answer) answer = dp[i];
+        int n1 = dp[i-1];
+        int n2 = dp[i-2] + wine[i];
+        int n3 = dp[i-3] + wine[i] + wine[i-1];
+        dp[i] = max(max(n1, n2), n3);
 	}
-	cout << answer;
+	cout << dp[n];
 }
 int main() {
 	init();
