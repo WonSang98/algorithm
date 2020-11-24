@@ -5,6 +5,8 @@ int n;
 int arr[1000];
 int dp[1000] = {1, };
 
+int max_len = 1;
+
 int max(int a, int b){
 	return a > b ? a: b;
 }
@@ -23,10 +25,11 @@ void solve(){
 		for(int j=0; j<i; j++){
 			if(arr[i] > arr[j]){
 				dp[i] = max(dp[i], dp[j] + 1);
+				max_len = max(max_len, dp[i]);
 			}
 		}
 	}
-	cout << dp[n-1];
+	cout << max_len;
 }
 
 
